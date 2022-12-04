@@ -1,0 +1,26 @@
+{% extends 'base.html'%}
+
+{% block 'titulo' %}Dashboard de {{ user }} | {% endblock %}
+
+{% block 'conteudo' %}
+{% include 'partials/_messages.html' %}
+
+<h1 class="mt-3 mb-3">Olá {{ user.first_name }} {{ user.last_name }}, esse é o seu dashboard. <a href="{% url 'logout' %}">Sair</a></h1><br><br>
+
+<h2>Cadastre um Contato</h2><br>
+
+<div class="container">
+  <form method="POST" action="{% url 'dashboard' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table class="table">
+      {{ form_contato }}
+
+      <tr>
+        <td colspan="2">
+          <button type="submit" class="btn btn-primary">Cadastrar Contato</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+{% endblock %}
